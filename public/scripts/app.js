@@ -61,6 +61,7 @@ function createTweetElement(tweets) {
   var tweetUsername = tweets.user.name;
   var tweetAvatar = tweets.user.avatars.regular;
   var tweetCreatedAt = tweets.created_at;
+
   return `<article class="tweet">
     <header>
       <span class="user">
