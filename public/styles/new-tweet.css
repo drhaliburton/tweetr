@@ -2,29 +2,25 @@
   background-color: #eee;
   content-align: center;
   width: 100%;
-  display: block;
   padding: 0 20px;
   border: 1px solid lightgrey;
   border-radius: 5px;
-  content: "";
-  display: table;
-  clear: both;
 }
 
 .new-tweet h2 {
   border-bottom: 1px solid black;
 }
 
-textarea {
+.new-tweet textarea {
   width: 100%;
+  resize: none;
 }
 
-input {
-  float: left;
+.new-tweet input {
   margin-bottom: 10px;
 }
 
-.counter {
+.new-tweet .counter {
   font-size: 15px;
   float: right;
   margin-top: 5px;
