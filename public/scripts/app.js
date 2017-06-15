@@ -4,55 +4,17 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+// var moment = require('moment');
+
 
 $(document).ready(function() {
+// $("time.timeago").timeago();
 
-var data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
+function escape(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
 
 function createTweetElement(tweets) {
 
@@ -60,30 +22,72 @@ function createTweetElement(tweets) {
   var tweetHandle = tweets.user.handle;
   var tweetUsername = tweets.user.name;
   var tweetAvatar = tweets.user.avatars.regular;
-  var tweetCreatedAt = tweets.created_at;
+  var tweetCreatedAt = $.timeago(tweets.created_at);
 
   return `<article class="tweet">
     <header>
       <span class="user">
-        <img src="${tweetAvatar}" /> ${tweetUsername}
+        <img src="${escape(tweetAvatar)}" /> ${escape(tweetUsername)}
       </span>
-      <span class="handle">${tweetHandle}</span>
+      <span class="handle">${escape(tweetHandle)}</span>
     </header>
-    <p class="tweet-content">${tweetContent}</p>
+    <p class="tweet-content">${escape(tweetContent)}</p>
     <footer>
-    <div>${tweetCreatedAt}<span class="icons">▲ ↩︎ ❤︎</span></div>
+    <div><time>${escape(tweetCreatedAt)}</time><span class="icons"> ▲ ↩︎ ❤︎</span></div>
     </footer>
   </article>`;
 }
 
+var $tweets = $('.tweets');
+
 function renderTweets(tweets) {
+  $tweets.empty();
   for (var i = 0; i < tweets.length; i++) {
     var $tweet = createTweetElement(tweets[i]);
-    $('.tweets').append($tweet);
+    $tweets.prepend($tweet);
   }
 };
 
-renderTweets(data);
+// renderTweets(data);
+
+// event.preventDefault();
+// console.log($(this).prev().val());
+// debugger;
+// var str = $(this).serialize();
+// var inputLength = Array.from(str).length;
+
+$('#new-tweet').on('submit', function (event) {
+  event.preventDefault();
+  var inputLength = ($(this).serialize().length - 5);
+  if (inputLength >= 140) {
+    error: alert('Tweet Exceeded Length');
+  } else {
+    $.ajax({
+      method: 'POST',
+      url: '/tweets',
+      data: $(this).serialize()
+    }).done(function () {
+      loadTweets();
+    });
+  }
+});
+
+function loadTweets() {
+  $.ajax({
+    method: 'GET',
+    url: '/tweets',
+    success: function (tweetData) {
+        renderTweets(tweetData)
+      }
+  });
+}
+
+$('.compose').on('click', function() {
+  var $newTweet = $('.new-tweet');
+  $newTweet.slideToggle();
+  $newTweet.find('textarea').select();
+});
+
+loadTweets();
 
 });
-// $('.tweets').append($tweet);
