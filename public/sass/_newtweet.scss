@@ -7,23 +7,23 @@
   border: 1px solid lightgrey;
   border-radius: 5px;
   margin-bottom: 20px;
-}
 
-.new-tweet h2 {
+  h2 {
   border-bottom: 1px solid black;
-}
+  }
 
-.new-tweet textarea {
+  textarea {
   width: 100%;
   resize: none;
-}
+  }
 
-.new-tweet input {
+  input {
   margin-bottom: 10px;
-}
+  }
 
-.new-tweet .counter {
+  .counter {
   font-size: 15px;
   float: right;
   margin-top: 5px;
+  }
 }

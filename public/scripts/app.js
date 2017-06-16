@@ -77,9 +77,6 @@ $('.compose').on('click', function() {
   var $newTweet = $('.new-tweet');
   $newTweet.slideToggle();
   $newTweet.find('textarea').select();
-  if ($newTweet.is(':visible')) {
-    $(this).fadeToggle(200);
-  }
 });
 
 loadTweets();
