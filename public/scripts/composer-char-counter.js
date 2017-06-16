@@ -1,3 +1,5 @@
+//Displays the input length in the new-tweet form less the max character count
+
 $(document).ready(function() {
   $(".new-tweet form textarea").on('input', function() {
     var inputValLength = $(this).val().length;
