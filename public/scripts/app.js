@@ -56,6 +56,7 @@ $('#new-tweet').on('submit', function (event) {
     }).done(function () {
       loadTweets();
       $('#new-tweet textarea').val("");
+      $('#new-tweet .counter').text(140);
     });
   }
 });
@@ -76,6 +77,9 @@ $('.compose').on('click', function() {
   var $newTweet = $('.new-tweet');
   $newTweet.slideToggle();
   $newTweet.find('textarea').select();
+  if ($newTweet.is(':visible')) {
+    $(this).fadeToggle(200);
+  }
 });
 
 loadTweets();
