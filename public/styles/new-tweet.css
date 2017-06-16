@@ -2,11 +2,11 @@
   display: none;
   background-color: #eee;
   content-align: center;
-  width: auto;
+  width: 100%;
   padding: 0 20px;
   border: 1px solid lightgrey;
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .new-tweet h2 {

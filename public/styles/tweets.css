@@ -1,15 +1,18 @@
 .tweets {
   content-align: center;
-  width: auto;
-  padding: 20px;
+  width: 100%;
+  padding: 10px 0;
 }
 
 .tweet {
   border: 1px solid lightgrey;
-  width: auto;
   border-radius: 5px;
   opacity: 0.6;
   margin-bottom: 20px;
+}
+
+.tweet:hover {
+  opacity: 1;
 }
 
 .tweet .icons {
@@ -21,13 +24,18 @@
   display: inline;
 }
 
-.tweet:hover {
-  opacity: 1;
-}
-
 .tweet header {
   background-color: #eee;
   padding: 10px;
+}
+
+.tweet p {
+  padding: 20px;
+}
+
+.tweet footer {
+  padding: 10px;
+  border-top: 1px solid #eee;
 }
 
 .tweet .user {
@@ -46,13 +54,4 @@
   color: grey;
   padding: 10px;
   float: right;
-}
-
-.tweet p {
-  padding: 20px;
-}
-
-.tweet footer {
-  padding: 10px;
-  border-top: 1px solid #eee;
 }

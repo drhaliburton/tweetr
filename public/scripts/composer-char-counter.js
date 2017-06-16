@@ -1,4 +1,4 @@
-//Displays the input length in the new-tweet form less the max character count
+//Displays the characters remaining for a valid tweet
 
 $(document).ready(function() {
   $(".new-tweet form textarea").on('input', function() {
