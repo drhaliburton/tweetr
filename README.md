@@ -11,7 +11,7 @@ Tweeter is a simple, single-page Twitter clone created in week 3 of the Lighthou
 - Chance
 - md5
 
-##Screenshots
+## Screenshots
 
 Tweeters homepage, displaying all previously posted tweets.
 
