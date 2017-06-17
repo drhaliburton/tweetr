@@ -69,9 +69,13 @@ $('body').on('click', '.like', function (event) {
   event.preventDefault();
   var isLiked = $(this).hasClass('liked');
   if (isLiked) {
-    $(this).toggleClass("liked");
+    $.ajax({
+      method: 'POST',
+      url: '/tweets/' + $tweetID + '/unlikes',
+    }).done(function () {
+      loadTweets();
+    });
   } else {
-    $(this).toggleClass("liked");
     $.ajax({
       method: 'POST',
       url: '/tweets/' + $tweetID + '/likes',
@@ -79,6 +83,7 @@ $('body').on('click', '.like', function (event) {
       loadTweets();
     });
   }
+  $(this).toggleClass("liked");
 });
 
 function loadTweets() {

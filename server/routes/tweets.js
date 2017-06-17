@@ -48,6 +48,13 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.post("/:id/unlikes", function(req, res) {
+    res.status(201).send();
+    DataHelpers.decrementLikes(req.params.id, (err, tweets) => {
+      return;
+    });
+  });
+
   return tweetsRoutes;
 
 }

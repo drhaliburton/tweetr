@@ -22,6 +22,9 @@ module.exports = function makeDataHelpers(db) {
 
     incrementLikes: function(id, callback) {
       db.collection("tweets").findOneAndUpdate({"_id" : ObjectID(id)}, { $inc: { "likes" : 1 } });
+    },
+    decrementLikes: function(id, callback) {
+      db.collection("tweets").findOneAndUpdate({"_id" : ObjectID(id)}, { $inc: { "likes" : -1 } });
     }
   }
 }
