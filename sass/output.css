@@ -87,6 +87,8 @@ main.container {
   .tweet .icons {
     float: right;
     display: none; }
+    .tweet .icons .like:mouseover {
+      color: #d3fff8; }
   .tweet:hover .icons {
     display: inline;
     cursor: pointer; }

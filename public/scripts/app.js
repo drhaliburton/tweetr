@@ -17,7 +17,7 @@ function createTweetElement(tweets) {
   var tweetAvatar = tweets.user.avatars.regular;
   var tweetCreatedAt = $.timeago(tweets.created_at);
 
-  return `<article class="tweet">
+  return `<article class="tweet" data-id="${tweets._id}">
     <header>
       <span class="user">
         <img src="${escape(tweetAvatar)}" /> ${escape(tweetUsername)}
@@ -26,7 +26,10 @@ function createTweetElement(tweets) {
     </header>
     <p class="tweet-content">${escape(tweetContent)}</p>
     <footer>
-    <div><time>${escape(tweetCreatedAt)}</time><span class="icons"> ▲ ↩︎ ❤︎</span></div>
+      <div><time>${escape(tweetCreatedAt)}</time>
+      <span class="icons">${tweets.likes || 0} <span class="like ${tweets.likes && "liked"}">❤︎</span> ⏎ ▲
+      </span>
+      </div>
     </footer>
   </article>`;
 }
@@ -57,6 +60,23 @@ $('#new-tweet').on('submit', function (event) {
       loadTweets();
       $('#new-tweet textarea').val("");
       $('#new-tweet .counter').text(140);
+    });
+  }
+});
+
+$('body').on('click', '.like', function (event) {
+  var $tweetID = $(this).closest('.tweet').data('id');
+  event.preventDefault();
+  var isLiked = $(this).hasClass('liked');
+  if (isLiked) {
+    $(this).toggleClass("liked");
+  } else {
+    $(this).toggleClass("liked");
+    $.ajax({
+      method: 'POST',
+      url: '/tweets/' + $tweetID + '/likes',
+    }).done(function () {
+      loadTweets();
     });
   }
 });

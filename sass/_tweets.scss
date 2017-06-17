@@ -17,6 +17,9 @@
   .icons {
   float: right;
   display: none;
+  .like:hover {
+    font-color: $light-green;
+  }
   }
 
   &:hover .icons {
@@ -54,4 +57,8 @@
     border-radius: 5px;
     }
   }
+}
+
+.liked {
+  color: tomato;
 }
